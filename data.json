@@ -1,0 +1,17 @@
+[
+    {
+      "Biomass Source": "Pomelo peel",
+      "Analyte Detected": "Cd2+, Pb2+, Cu2+",
+      "Synthesis Method": "Pyrolysis",
+      "LOD (µM or nM)": "13.3, 6.6, 11.9 nM",
+      "Reference": "(Zhang et al., 2022)"
+    },
+    {
+      "Biomass Source": "Kenaf stem",
+      "Analyte Detected": "Glucose, H2O2",
+      "Synthesis Method": "Hydrothermal & Pyrolysis",
+      "LOD (µM or nM)": "4.8 µM (glucose), 0.022 µM (H2O2)",
+      "Reference": "(Wang et al., 2021)"
+    }
+  ]
+  

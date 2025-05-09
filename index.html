@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Biomass Sensor Database</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-4">
+  <div class="max-w-5xl mx-auto bg-white p-6 rounded shadow">
+    <h1 class="text-2xl font-bold mb-4">Biomass-Derived Sensor Database</h1>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+      <select id="biomassFilter" class="p-2 border rounded">
+        <option value="">Select Biomass Source</option>
+      </select>
+      <select id="analyteFilter" class="p-2 border rounded">
+        <option value="">Select Analyte</option>
+      </select>
+      <button onclick="filterData()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Search</button>
+    </div>
+    
+    <div class="overflow-x-auto">
+      <table class="min-w-full border text-sm text-left">
+        <thead class="bg-gray-200">
+          <tr>
+            <th class="px-2 py-1 border">Biomass</th>
+            <th class="px-2 py-1 border">Analyte</th>
+            <th class="px-2 py-1 border">Method</th>
+            <th class="px-2 py-1 border">LOD</th>
+            <th class="px-2 py-1 border">Reference</th>
+          </tr>
+        </thead>
+        <tbody id="resultsTable"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
