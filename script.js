@@ -1,9 +1,21 @@
 let dataset = [];
 
 async function loadData() {
-  const res = await fetch('data.json');
-  dataset = await res.json();
+  const response = await fetch('biomass_sensor_database.csv'); // CSV not JSON
+  const csvText = await response.text();
 
+  Papa.parse(csvText, {
+    header: true,
+    skipEmptyLines: true,
+    complete: function(results) {
+      dataset = results.data;
+      populateFilters();
+      filterData();
+    }
+  });
+}
+
+function populateFilters() {
   const biomassSet = new Set();
   const analyteSet = new Set();
 
@@ -12,14 +24,16 @@ async function loadData() {
     row["Analyte Detected"].split(",").forEach(a => analyteSet.add(a.trim()));
   });
 
-  for (let value of biomassSet) {
-    document.getElementById("biomassFilter").innerHTML += `<option value="${value}">${value}</option>`;
-  }
-  for (let value of analyteSet) {
-    document.getElementById("analyteFilter").innerHTML += `<option value="${value}">${value}</option>`;
-  }
+  const biomassFilter = document.getElementById("biomassFilter");
+  const analyteFilter = document.getElementById("analyteFilter");
 
-  filterData(); // initial render
+  biomassSet.forEach(value => {
+    biomassFilter.innerHTML += `<option value="${value}">${value}</option>`;
+  });
+
+  analyteSet.forEach(value => {
+    analyteFilter.innerHTML += `<option value="${value}">${value}</option>`;
+  });
 }
 
 function filterData() {
@@ -47,9 +61,9 @@ function filterData() {
 }
 
 function resetFilters() {
-    document.getElementById("biomassFilter").value = "";
-    document.getElementById("analyteFilter").value = "";
-    filterData();
-  }
-  
+  document.getElementById("biomassFilter").value = "";
+  document.getElementById("analyteFilter").value = "";
+  filterData();
+}
+
 loadData();
