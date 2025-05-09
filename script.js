@@ -1,19 +1,28 @@
 let dataset = [];
 
 async function loadData() {
-  const response = await fetch('biomass_sensor_database.csv'); // CSV not JSON
+  const response = await fetch('biomass_sensor_database.csv');
   const csvText = await response.text();
 
   Papa.parse(csvText, {
     header: true,
     skipEmptyLines: true,
+    transformHeader: header => header.trim(),
     complete: function(results) {
-      dataset = results.data;
+      dataset = results.data.map(row => {
+        const cleanedRow = {};
+        for (const key in row) {
+          cleanedRow[key.trim()] = row[key].trim();
+        }
+        return cleanedRow;
+      });
+      console.log("Dataset Loaded:", dataset[0]); 
       populateFilters();
       filterData();
     }
   });
 }
+
 
 function populateFilters() {
   const biomassSet = new Set();
