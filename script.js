@@ -46,4 +46,10 @@ function filterData() {
   });
 }
 
+function resetFilters() {
+    document.getElementById("biomassFilter").value = "";
+    document.getElementById("analyteFilter").value = "";
+    filterData();
+  }
+  
 loadData();
